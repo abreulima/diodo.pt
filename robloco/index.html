@@ -1,0 +1,133 @@
+<!DOCTYPE html>
+<html lang="en">
+
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Ivanotto</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+
+    <!-- Ivanotto's Script -->
+    <script src="scripts/globals.js" defer></script>
+    <script src="scripts/tabs.js" defer></script>
+    <script src="scripts/serial.js" defer></script>
+    <script src="scripts/noseSimple.js" defer></script>
+    <script src="scripts/customNose.js" defer></script>
+    <script src="scripts/background.js" defer></script>
+    <script src="scripts/ledMatrix.js" defer></script>
+</head>
+
+<body class="bg-green-300 bg-[url('images/bg.png')]">
+
+    <!-- UI Sounds -->
+    <audio id="clickSound" src="sounds/click5.ogg">adsa</audio>
+
+
+    <div class="flex flex-col space-y-8 max-w-4xl mx-auto mt-10 p-6 bg-white shadow-sm">
+
+        <nav class="flex space-x-4" aria-label="Tabs" role="tablist">
+
+            <button
+                id="connectButton"
+                onclick="openTab(event, 'connectTab'); connectToSerial();" type="button"
+                class="tab-button active text-white font-medium p-2 rounded shadow-sm outline outline-offset-2">
+                    Connect
+            </button>
+
+            <button
+                id="noseButton"
+                onclick="openTab(event, 'noseSimpleTab')" type="button"
+                class="tab-button text-white font-medium p-2 rounded shadow-sm outline outline-offset-2">
+                    Nose
+            </button>
+
+            <button
+                id="customNoseButton"
+                onclick="openTab(event, 'noseCustomTab')" type="button"
+                class="tab-button text-white font-medium p-2 rounded shadow-sm outline outline-offset-2">
+                    Custom Nose
+            </button>
+
+            <button
+                id="mouthButton"
+                onclick="openTab(event, 'mouthTab')" type="button"
+                class="tab-button text-white font-medium p-2 rounded shadow-sm outline outline-offset-2">
+                    Mouth
+            </button>
+
+            <button
+                id="bodyButton"
+                onclick="openTab(event, 'bodyTab')" type="button"
+                class="tab-button text-white font-medium p-2 rounded shadow-sm outline outline-offset-2">
+                    Body
+            </button>
+
+        </nav>
+
+        <div id="connectTab" class="tab-content active">
+            Content of Tab 1
+        </div>
+
+        <div id="noseSimpleTab" class="tab-content hidden">
+            <!-- The grid is populated using JavaScript -->
+            <div id="colorGrid" class="grid grid-cols-12 gap-2"></div>
+        </div>
+
+        <div id="noseCustomTab" class="tab-content hidden">
+            <input type="color" id="customNose" name="color">
+        </div>
+
+        <div id="mouthTab" class="tab-content hidden">
+            <!-- The grid is populated using JavaScript -->
+            <div id="ledGrid" class="grid grid-cols-8 gap-4"></div>
+        </div>
+
+        <div id="bodyTab" class="tab-content hidden">
+            <div class="grid grid-cols-[max-content_1fr] grid-rows-5 gap-4">
+                
+                <div>
+                    <input
+                    class="w-64"
+                    type="range" id="slider" min="0" max="180" step="1" value="90" oninput="sendBytesArray([0x02, RIGHT_HAND, this.value]);">
+                </div>
+                <div class="col-start-1 row-start-2">
+                    <input 
+                    class="w-64"
+                    type="range" id="slider" min="0" max="180" step="1" value="90" oninput="sendBytesArray([0x02, RIGHT_LEG, this.value]);">
+                </div>
+                <div class="col-start-1 row-start-3">
+                    <input
+                    class="w-64"
+                    type="range" id="slider" min="0" max="180" step="1" value="90" oninput="sendBytesArray([0x02, RIGHT_FOOT, this.value]);">
+                </div>
+                <div class="row-span-3 col-start-2 row-start-1">
+                    <img src="images/otto-arms.png">
+                </div>
+                <div class="col-start-3 row-start-1">
+                    <input 
+                    class="w-64"
+                    type="range" id="slider" min="0" max="180" step="1" value="90" oninput="sendBytesArray([0x02, LEFT_HAND, this.value]);">
+                </div>
+                <div class="col-start-3 row-start-2">
+                    <input 
+                    class="w-64"
+                    type="range" id="slider" min="0" max="180" step="1" value="90" oninput="sendBytesArray([0x02, LEFT_LEG, this.value]);">
+                </div>
+                <div class="col-start-3 row-start-3">
+                    <input 
+                    class="w-64"
+                    type="range" id="slider" min="0" max="180" step="1" value="90" oninput="sendBytesArray([0x02, LEFT_FOOT, this.value]);">
+                </div>
+
+            </div>
+        </div>
+
+    </div>
+
+
+
+    </div>
+
+</body>
+
+</html>
